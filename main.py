@@ -11,16 +11,14 @@ teams = {
     "Tamil Thalaivas": 12,
     "Haryana Steelers": 14,
     "Jaipur Pink Panthers": 12,
-    "Gujarat Giants": 8,
-    "UP Yoddhas": 10,
+    "Gujarat Giants": 10,
+    "UP Yoddhas": 12,
     "Bengal Warriorz": 8,
     "Patna Pirates": 8,
 }
 
 # --- Remaining Matches ---
 matches = [
-    ("Patna Pirates", "Gujarat Giants"),
-    ("UP Yoddhas", "Tamil Thalaivas"),
     ("Telugu Titans", "Bengal Warriorz"),
     ("Jaipur Pink Panthers", "Puneri Paltan"),
     ("Gujarat Giants", "Tamil Thalaivas"),
@@ -48,7 +46,7 @@ matches = [
 ]
 
 # --- Simulation Parameters ---
-SIMULATIONS = 200000  # Try 200k (≈ few seconds), can increase up to 1M
+SIMULATIONS = 2000000  # Try 200k (≈ few seconds), can increase up to 1M
 
 top2 = defaultdict(int)
 top8 = defaultdict(int)
