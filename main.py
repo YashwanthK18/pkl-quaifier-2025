@@ -1,5 +1,8 @@
-import random
+import itertools
 from collections import defaultdict
+import time
+
+start_time = time.time()
 
 # --- Current Points Table ---
 teams = {
@@ -17,7 +20,6 @@ teams = {
     "Patna Pirates": 8,
 }
 
-# --- Remaining Matches ---
 matches = [
     ("Telugu Titans", "Bengal Warriorz"),
     ("Jaipur Pink Panthers", "Puneri Paltan"),
@@ -45,56 +47,67 @@ matches = [
     ("Patna Pirates", "Jaipur Pink Panthers"),
 ]
 
-# --- Simulation Parameters ---
-SIMULATIONS = 2000000  # Try 200k (≈ few seconds), can increase up to 1M
-
-top2 = defaultdict(int)
-top8 = defaultdict(int)
-pos3_4 = defaultdict(int)
-pos5_8 = defaultdict(int)
+qualification = defaultdict(float)
+top2 = defaultdict(float)
+pos3_4 = defaultdict(float)
+pos5_8 = defaultdict(float)
 
 team_names = list(teams.keys())
+num_matches = len(matches)
 
-for _ in range(SIMULATIONS):
+# --- Function to distribute slots fairly at tie boundaries ---
+def distribute_slots(sorted_points, total_slots, target_dict):
+    if total_slots > len(sorted_points):
+        total_slots = len(sorted_points)
+    cutoff_points = sorted_points[total_slots - 1][1]
+    above = [(t, p) for t, p in sorted_points if p > cutoff_points]
+    tied = [(t, p) for t, p in sorted_points if p == cutoff_points]
+    remaining_slots = total_slots - len(above)
+    share = remaining_slots / len(tied) if tied else 0
+    for t, _ in above:
+        target_dict[t] += 1
+    for t, _ in tied:
+        target_dict[t] += share
+
+# --- Generate all possible outcomes ---
+# Each match has 2 outcomes, so use itertools.product
+for outcome in itertools.product([0, 1], repeat=num_matches):
     points = teams.copy()
-
-    for a, b in matches:
-        # Randomly pick a winner (50/50)
-        winner = random.choice([a, b])
+    for i, result in enumerate(outcome):
+        winner = matches[i][result]  # 0 → team A wins, 1 → team B wins
         points[winner] += 2
 
-    # Rank teams by points (descending)
-    ranked = sorted(points.items(), key=lambda x: x[1], reverse=True)
-    ranks = {team: i+1 for i, (team, _) in enumerate(ranked)}
+    sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
+    distribute_slots(sorted_points, 8, qualification)
+    distribute_slots(sorted_points, 2, top2)
+    distribute_slots(sorted_points[2:], 2, pos3_4)
+    distribute_slots(sorted_points[4:], 4, pos5_8)
 
-    for team, rank in ranks.items():
-        if rank <= 2:
-            top2[team] += 1
-        if rank <= 8:
-            top8[team] += 1
-        if rank in [3, 4]:
-            pos3_4[team] += 1
-        if rank in [5, 6, 7, 8]:
-            pos5_8[team] += 1
+total_simulations = 2 ** num_matches
 
-# --- Compute Probabilities ---
-def pct(count): return round(100 * count / SIMULATIONS, 2)
+# --- Convert to percentages ---
+def pct(value): return round(100 * value / total_simulations, 2)
 
 summary = []
 for team in team_names:
     summary.append({
         "Team": team,
+        "Qualification Chances": pct(qualification[team]),
         "Top 2": pct(top2[team]),
-        "Top 8": pct(top8[team]),
         "Pos 3-4": pct(pos3_4[team]),
         "Pos 5-8": pct(pos5_8[team])
     })
 
-# Sort teams by Top 6 chances
-summary.sort(key=lambda x: x["Top 8"], reverse=True)
+summary.sort(key=lambda x: x["Qualification Chances"], reverse=True)
 
-# --- Display Results ---
-print(f"{'Team':25s} {'Top 8%':>11s} {'Qualifier':>13s} {'Mini Qualifier':>15s} {'Play In':>8s}")
-print("-"*88)
+# --- Display table ---
+print(f"{'Team':25s} {'Qualification%':>16s} {'Top 2%':>10s} {'Pos 3-4%':>10s} {'Pos 5-8%':>10s}")
+print("-" * 80)
+total_qualify = 0
 for s in summary:
-    print(f"{s['Team']:25s} {s['Top 8']:11.2f} {s['Top 2']:11.2f} {s['Pos 3-4']:13.2f} {s['Pos 5-8']:11.2f}")
+    total_qualify += s["Qualification Chances"]
+    print(f"{s['Team']:25s} {s['Qualification Chances']:16.2f} {s['Top 2']:10.2f} {s['Pos 3-4']:10.2f} {s['Pos 5-8']:10.2f}")
+
+print("-" * 80)
+print(f"Total Qualification % = {round(total_qualify, 2)} (Should be 800.00)")
+print(f"Time Taken: {round(time.time() - start_time, 2)} seconds")

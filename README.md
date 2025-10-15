@@ -6,20 +6,20 @@ This dataset presents the **qualifying probabilities** of all teams in the **Pro
 
 ## 📊 Qualifying Chances Table
 
-| Team                   | Top 8 (%) | Qualifier (%) | Mini Qualifier (%) | Play-In (%) |
-|-------------------------|-----------|----------------|--------------------|-------------|
-| **Puneri Paltan**       | 100.00    | 99.32          | 0.68               | 0.00        |
-| **Dabang Delhi K.C.**   | 100.00    | 99.61          | 0.39               | 0.00        |
-| **Telugu Titans**       | 99.99     | 1.07           | 84.36              | 14.55       |
-| **Bengaluru Bulls**     | 99.98     | 0.00           | 73.54              | 26.44       |
-| **U Mumba**             | 95.56     | 0.00           | 18.90              | 76.66       |
-| **Haryana Steelers**    | 93.42     | 0.00           | 15.46              | 77.95       |
-| **Jaipur Pink Panthers**| 80.46     | 0.00           | 6.43               | 74.03       |
-| **Tamil Thalaivas**     | 58.91     | 0.00           | 0.12               | 58.79       |
-| **UP Yoddhas**          | 31.57     | 0.00           | 0.06               | 31.51       |
-| **Gujarat Giants**      | 24.07     | 0.00           | 0.04               | 24.03       |
-| **Bengal Warriorz**     | 8.90      | 0.00           | 0.01               | 8.89        |
-| **Patna Pirates**       | 7.14      | 0.00           | 0.00               | 7.14        |
+| Team                     | Top 8 (%) | Qualifier (%) | Mini Qualifier (%) | Play-In (%) |
+|--------------------------|-----------|---------------|--------------------|-------------|
+| **Puneri Paltan**        | 100.00    | 96.90         | 0.68               | 0.00        |
+| **Dabang Delhi K.C.**    | 100.00    | 97.75         | 0.39               | 0.00        |
+| **Telugu Titans**        | 99.24     | 4.35          | 73.03              | 13.82       |
+| **Bengaluru Bulls**      | 98.62     | 1.00          | 61.26              | 25.11       |
+| **U Mumba**              | 89.04     | 0.00          | 24.40              | 70.18       |
+| **Haryana Steelers**     | 88.87     | 0.00          | 23.84              | 73.35       |
+| **Jaipur Pink Panthers** | 76.08     | 0.00          | 13.20              | 69.62       |
+| **Tamil Thalaivas**      | 44.31     | 0.00          | 0.59               | 44.19       |
+| **UP Yoddhas**           | 43.78     | 0.00          | 1.29               | 43.72       |
+| **Gujarat Giants**       | 27.34     | 0.00          | 0.72               | 27.30       |
+| **Bengal Warriorz**      | 16.91     | 0.00          | 0.33               | 16.90       |
+| **Patna Pirates**        | 15.81     | 0.00          | 0.26               | 15.81       |
 
 ---
 
