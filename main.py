@@ -1,12 +1,9 @@
 import itertools
 from collections import defaultdict
-import time
-
-start_time = time.time()
 
 # --- Current Points Table ---
 teams = {
-    "Puneri Paltan": 24,
+    "Puneri Paltan": 26,
     "Dabang Delhi K.C.": 24,
     "Telugu Titans": 16,
     "Bengaluru Bulls": 16,
@@ -14,16 +11,13 @@ teams = {
     "Tamil Thalaivas": 12,
     "Haryana Steelers": 14,
     "Jaipur Pink Panthers": 12,
-    "Gujarat Giants": 10,
+    "Gujarat Giants": 12,
     "UP Yoddhas": 12,
-    "Bengal Warriorz": 8,
-    "Patna Pirates": 8,
+    "Bengal Warriorz": 10,
+    "Patna Pirates": 6
 }
 
 matches = [
-    ("Telugu Titans", "Bengal Warriorz"),
-    ("Jaipur Pink Panthers", "Puneri Paltan"),
-    ("Gujarat Giants", "Tamil Thalaivas"),
     ("Bengaluru Bulls", "Patna Pirates"),
     ("Telugu Titans", "U Mumba"),
     ("UP Yoddhas", "Haryana Steelers"),
@@ -109,5 +103,3 @@ for s in summary:
     print(f"{s['Team']:25s} {s['Qualification Chances']:16.2f} {s['Top 2']:10.2f} {s['Pos 3-4']:10.2f} {s['Pos 5-8']:10.2f}")
 
 print("-" * 80)
-print(f"Total Qualification % = {round(total_qualify, 2)} (Should be 800.00)")
-print(f"Time Taken: {round(time.time() - start_time, 2)} seconds")
