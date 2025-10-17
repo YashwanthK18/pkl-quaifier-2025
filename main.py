@@ -7,20 +7,17 @@ teams = {
     "Dabang Delhi K.C.": 24,
     "Telugu Titans": 16,
     "Bengaluru Bulls": 16,
-    "U Mumba": 14,
+    "U Mumba": 16,
     "Tamil Thalaivas": 12,
-    "Haryana Steelers": 14,
+    "Haryana Steelers": 16,
     "Jaipur Pink Panthers": 12,
     "Gujarat Giants": 12,
     "UP Yoddhas": 12,
     "Bengal Warriorz": 10,
-    "Patna Pirates": 6
+    "Patna Pirates": 8
 }
 
 matches = [
-    ("Bengaluru Bulls", "Patna Pirates"),
-    ("Telugu Titans", "U Mumba"),
-    ("UP Yoddhas", "Haryana Steelers"),
     ("Bengal Warriorz", "Patna Pirates"),
     ("Tamil Thalaivas", "Dabang Delhi K.C."),
     ("Jaipur Pink Panthers", "UP Yoddhas"),
