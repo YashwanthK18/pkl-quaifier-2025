@@ -4,23 +4,20 @@ from collections import defaultdict
 # --- Current Points Table ---
 teams = {
     "Puneri Paltan": 26,
-    "Dabang Delhi K.C.": 24,
+    "Dabang Delhi K.C.": 26,
     "Telugu Titans": 16,
     "Bengaluru Bulls": 16,
     "U Mumba": 16,
     "Tamil Thalaivas": 12,
     "Haryana Steelers": 16,
-    "Jaipur Pink Panthers": 12,
+    "Jaipur Pink Panthers": 14,
     "Gujarat Giants": 12,
     "UP Yoddhas": 12,
     "Bengal Warriorz": 10,
-    "Patna Pirates": 8
+    "Patna Pirates": 10
 }
 
 matches = [
-    ("Bengal Warriorz", "Patna Pirates"),
-    ("Tamil Thalaivas", "Dabang Delhi K.C."),
-    ("Jaipur Pink Panthers", "UP Yoddhas"),
     ("Bengaluru Bulls", "Dabang Delhi K.C."),
     ("Telugu Titans", "Puneri Paltan"),
     ("Bengal Warriorz", "Jaipur Pink Panthers"),
