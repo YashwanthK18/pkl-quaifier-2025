@@ -1,26 +1,25 @@
 import itertools
 from collections import defaultdict
+import random
 
 # --- Current Points Table ---
 teams = {
     "Puneri Paltan": 26,
     "Dabang Delhi K.C.": 26,
-    "Telugu Titans": 16,
-    "Bengaluru Bulls": 16,
+    "Telugu Titans": 18,
+    "Bengaluru Bulls": 18,
     "U Mumba": 16,
     "Tamil Thalaivas": 12,
     "Haryana Steelers": 16,
-    "Jaipur Pink Panthers": 14,
+    "Jaipur Pink Panthers": 16,
     "Gujarat Giants": 12,
     "UP Yoddhas": 12,
     "Bengal Warriorz": 10,
     "Patna Pirates": 10
 }
 
+# --- Remaining Matches ---
 matches = [
-    ("Bengaluru Bulls", "Dabang Delhi K.C."),
-    ("Telugu Titans", "Puneri Paltan"),
-    ("Bengal Warriorz", "Jaipur Pink Panthers"),
     ("Telugu Titans", "Gujarat Giants"),
     ("U Mumba", "Haryana Steelers"),
     ("Patna Pirates", "Puneri Paltan"),
@@ -35,65 +34,97 @@ matches = [
     ("Patna Pirates", "Jaipur Pink Panthers"),
 ]
 
-qualification = defaultdict(float)
-top2 = defaultdict(float)
-pos3_4 = defaultdict(float)
-pos5_8 = defaultdict(float)
-
 team_names = list(teams.keys())
 num_matches = len(matches)
-
-# --- Function to distribute slots fairly at tie boundaries ---
-def distribute_slots(sorted_points, total_slots, target_dict):
-    if total_slots > len(sorted_points):
-        total_slots = len(sorted_points)
-    cutoff_points = sorted_points[total_slots - 1][1]
-    above = [(t, p) for t, p in sorted_points if p > cutoff_points]
-    tied = [(t, p) for t, p in sorted_points if p == cutoff_points]
-    remaining_slots = total_slots - len(above)
-    share = remaining_slots / len(tied) if tied else 0
-    for t, _ in above:
-        target_dict[t] += 1
-    for t, _ in tied:
-        target_dict[t] += share
-
-# --- Generate all possible outcomes ---
-# Each match has 2 outcomes, so use itertools.product
-for outcome in itertools.product([0, 1], repeat=num_matches):
-    points = teams.copy()
-    for i, result in enumerate(outcome):
-        winner = matches[i][result]  # 0 → team A wins, 1 → team B wins
-        points[winner] += 2
-
-    sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
-    distribute_slots(sorted_points, 8, qualification)
-    distribute_slots(sorted_points, 2, top2)
-    distribute_slots(sorted_points[2:], 2, pos3_4)
-    distribute_slots(sorted_points[4:], 4, pos5_8)
-
 total_simulations = 2 ** num_matches
+num_iterations = 100  # <-- Run 25 full simulations
 
-# --- Convert to percentages ---
-def pct(value): return round(100 * value / total_simulations, 2)
+# --- Aggregated Averages ---
+avg_qualification = defaultdict(float)
+avg_top2 = defaultdict(float)
+avg_pos3_4 = defaultdict(float)
+avg_pos5_8 = defaultdict(float)
 
+def simulate_once():
+    qualification = defaultdict(float)
+    top2 = defaultdict(float)
+    pos3_4 = defaultdict(float)
+    pos5_8 = defaultdict(float)
+
+    # --- Iterate through all match outcomes ---
+    for outcome in itertools.product([0, 1], repeat=num_matches):
+        points = teams.copy()
+        point_diff = {team: 0 for team in team_names}
+
+        for i, result in enumerate(outcome):
+            winner = matches[i][result]
+            loser = matches[i][1 - result]
+            points[winner] += 2
+
+            # Random PD difference
+            diff = random.randint(0, 20)
+            point_diff[winner] += diff
+            point_diff[loser] -= diff
+
+        # Sort standings by points then PD
+        sorted_points = sorted(points.items(), key=lambda x: (x[1], point_diff[x[0]]), reverse=True)
+
+        # Top slots
+        for team, _ in sorted_points[:8]:
+            qualification[team] += 1
+        for team, _ in sorted_points[:2]:
+            top2[team] += 1
+        for team, _ in sorted_points[2:4]:
+            pos3_4[team] += 1
+        for team, _ in sorted_points[4:8]:
+            pos5_8[team] += 1
+
+    # Convert to percentages
+    def pct(val): return 100 * val / total_simulations
+
+    results = {}
+    for t in team_names:
+        results[t] = {
+            "Qualification": pct(qualification[t]),
+            "Top2": pct(top2[t]),
+            "Pos3_4": pct(pos3_4[t]),
+            "Pos5_8": pct(pos5_8[t])
+        }
+    return results
+
+
+# --- Run 25 Iterations and Average ---
+for _ in range(num_iterations):
+    res = simulate_once()
+    for t in team_names:
+        avg_qualification[t] += res[t]["Qualification"]
+        avg_top2[t] += res[t]["Top2"]
+        avg_pos3_4[t] += res[t]["Pos3_4"]
+        avg_pos5_8[t] += res[t]["Pos5_8"]
+
+# --- Average Across Iterations ---
+for t in team_names:
+    avg_qualification[t] /= num_iterations
+    avg_top2[t] /= num_iterations
+    avg_pos3_4[t] /= num_iterations
+    avg_pos5_8[t] /= num_iterations
+
+# --- Prepare Final Table ---
 summary = []
 for team in team_names:
     summary.append({
         "Team": team,
-        "Qualification Chances": pct(qualification[team]),
-        "Top 2": pct(top2[team]),
-        "Pos 3-4": pct(pos3_4[team]),
-        "Pos 5-8": pct(pos5_8[team])
+        "Qualification Chances": round(avg_qualification[team], 2),
+        "Top 2": round(avg_top2[team], 2),
+        "Pos 3-4": round(avg_pos3_4[team], 2),
+        "Pos 5-8": round(avg_pos5_8[team], 2)
     })
 
 summary.sort(key=lambda x: x["Qualification Chances"], reverse=True)
 
-# --- Display table ---
+# --- Display Table ---
 print(f"{'Team':25s} {'Qualification%':>16s} {'Top 2%':>10s} {'Pos 3-4%':>10s} {'Pos 5-8%':>10s}")
 print("-" * 80)
-total_qualify = 0
 for s in summary:
-    total_qualify += s["Qualification Chances"]
     print(f"{s['Team']:25s} {s['Qualification Chances']:16.2f} {s['Top 2']:10.2f} {s['Pos 3-4']:10.2f} {s['Pos 5-8']:10.2f}")
-
 print("-" * 80)
