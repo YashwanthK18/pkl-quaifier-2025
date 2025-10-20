@@ -6,23 +6,20 @@ import random
 teams = {
     "Puneri Paltan": 26,
     "Dabang Delhi K.C.": 26,
-    "Telugu Titans": 18,
+    "Telugu Titans": 20,
     "Bengaluru Bulls": 18,
-    "U Mumba": 16,
+    "U Mumba": 18,
     "Tamil Thalaivas": 12,
     "Haryana Steelers": 16,
     "Jaipur Pink Panthers": 16,
     "Gujarat Giants": 12,
     "UP Yoddhas": 12,
     "Bengal Warriorz": 10,
-    "Patna Pirates": 10
+    "Patna Pirates": 12
 }
 
 # --- Remaining Matches ---
 matches = [
-    ("Telugu Titans", "Gujarat Giants"),
-    ("U Mumba", "Haryana Steelers"),
-    ("Patna Pirates", "Puneri Paltan"),
     ("Bengal Warriorz", "Tamil Thalaivas"),
     ("U Mumba", "Jaipur Pink Panthers"),
     ("Haryana Steelers", "Gujarat Giants"),
