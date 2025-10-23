@@ -1,10 +1,29 @@
-# 🏆 Pro Kabaddi League – Qualifying Chances (as of 21/10/2025)
+# 🏆 Pro Kabaddi League – Qualifying Chances (as of 22/10/2025)
 
-This dataset presents the **qualifying probabilities** of all teams in the **Pro Kabaddi League (PKL)** as of **October 21, 2025**.
+This dataset presents the **qualifying probabilities** of all teams in the **Pro Kabaddi League (PKL)** as of **October 22, 2025**.
 
 ## 📊 Qualifying Chances Table
 
 ---
+| Team | Qualification% | Qualifiers% | Mini-Qualifiers% | Play-ins% |
+| :--- | :---: | :---: | :---: | :---: |
+| Puneri Paltan | 100.00 | 100.00 | 0.00 | 0.00 |
+| Dabang Delhi K.C. | 100.00 | 100.00 | 0.00 | 0.00 |
+| Telugu Titans | 100.00 | 0.00 | 51.94 | 48.06 |
+| Bengaluru Bulls | 100.00 | 0.00 | 98.06 | 1.94 |
+| U Mumba | 100.00 | 0.00 | 50.00 | 50.00 |
+| Haryana Steelers | 100.00 | 0.00 | 0.00 | 100.00 |
+| Jaipur Pink Panthers | 100.00 | 0.00 | 0.00 | 100.00 |
+| Patna Pirates | 70.46 | 0.00 | 0.00 | 70.46 |
+| Gujarat Giants | 24.34 | 0.00 | 0.00 | 24.34 |
+| UP Yoddhas | 5.20 | 0.00 | 0.00 | 5.20 |
+| Tamil Thalaivas | 0.00 | 0.00 | 0.00 | 0.00 |
+| Bengal Warriorz | 0.00 | 0.00 | 0.00 | 0.00 |
+
+---
+# These are the previous results
+# 🏆 Pro Kabaddi League – Qualifying Chances (as of 21/10/2025)
+
 | Team | Qualification% | Qualifiers% | Mini-Qualifiers% | Play-ins% |
 | :--- | :---: | :---: | :---: | :---: |
 | Puneri Paltan | 100.00 | 100.00 | 0.00 | 0.00 |
@@ -20,9 +39,6 @@ This dataset presents the **qualifying probabilities** of all teams in the **Pro
 | Bengal Warriorz | 3.89 | 0.00 | 0.00 | 3.89 |
 | Tamil Thalaivas | 3.12 | 0.00 | 0.00 | 3.12 |
 ---
-
-# These are the previous results
-
 
 # 🏆 Pro Kabaddi League – Qualifying Chances (as of 20/10/2025)
 

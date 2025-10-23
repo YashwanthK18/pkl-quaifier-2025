@@ -7,38 +7,35 @@ teams = {
     "Puneri Paltan": 26,
     "Dabang Delhi K.C.": 26,
     "Telugu Titans": 20,
-    "Bengaluru Bulls": 18,
+    "Bengaluru Bulls": 20,
     "U Mumba": 20,
     "Tamil Thalaivas": 12,
-    "Haryana Steelers": 18,
+    "Haryana Steelers": 20,
     "Jaipur Pink Panthers": 16,
     "Gujarat Giants": 12,
     "UP Yoddhas": 12,
     "Bengal Warriorz": 12,
-    "Patna Pirates": 12
+    "Patna Pirates": 14
 }
 
 # --- Current Point Difference ---
 initial_point_diff = {
     "Puneri Paltan": 88,
     "Dabang Delhi K.C.": 73,
-    "Telugu Titans": 56,
+    "Telugu Titans": 45,
     "U Mumba": 11,
-    "Bengaluru Bulls": 39,
-    "Haryana Steelers": 29,
+    "Bengaluru Bulls": 69,
+    "Haryana Steelers": 40,
     "Jaipur Pink Panthers": -33,
     "Gujarat Giants": -45,
     "Tamil Thalaivas": -36,
     "Patna Pirates": -40,
     "UP Yoddhas": -68,
-    "Bengal Warriorz": -74
+    "Bengal Warriorz": -104
 }
 
 # --- Remaining Matches ---
 matches = [
-    ("Haryana Steelers", "Telugu Titans"),
-    ("Bengaluru Bulls", "Bengal Warriorz"),
-    ("Dabang Delhi K.C.", "Patna Pirates"),
     ("Bengaluru Bulls", "Gujarat Giants"),
     ("UP Yoddhas", "U Mumba"),
     ("Patna Pirates", "Jaipur Pink Panthers"),
@@ -47,7 +44,7 @@ matches = [
 team_names = list(teams.keys())
 num_matches = len(matches)
 total_simulations = 2 ** num_matches
-num_iterations = 100  # <-- Run 100 full simulations
+num_iterations = 1000  # <-- Run 100 full simulations
 
 # --- Aggregated Averages ---
 avg_qualification = defaultdict(float)
@@ -75,7 +72,7 @@ def simulate_once():
             points[winner] += 2
 
             # Random PD difference for the match
-            diff = random.randint(0, 20)
+            diff = random.randint(0, 25)
             point_diff[winner] += diff
             point_diff[loser] -= diff
 
